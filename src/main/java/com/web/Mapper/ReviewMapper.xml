@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.web.dao.ReviewDao">
+ <cache></cache>
+ 	<resultMap type="com.web.pojo.ReviewBean" id="ReviewList">
+ 		<result property="id" column="id"/>
+ 		<result property="username" column="username"/>
+ 		<result property="review" column="review"/>
+ 		<result property="production_id" column="production_id"/>
+ 		<result property="time" column="time"/>
+ 	</resultMap>
+ 
+ 	<insert id="insertReview" parameterType="com.web.pojo.ReviewBean">
+ 		insert into reviewmodel(username,production_id,review,time)
+ 		values(#{username},#{production_id},#{review},#{time})     
+ 	</insert>
+ 	<delete id="deleteReview">
+ 		delete from reviewmodel where id = #{id}
+ 	</delete>
+ 	<update id="updateReview">
+ 		update reviewmodel
+ 		<set>
+ 			<if test="username != null"> username = #{username},</if>
+ 			<if test="review != null"> review = #{review},</if>
+ 			<if test="production_id != null"> production_id = #{production_id},</if>
+ 			<if test="time != null"> time = #{time},</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="getReviewById" resultMap="ReviewList" parameterType="int">
+ 		select *
+ 		from reviewmodel
+ 		where id=#{id}
+ 	</select>
+ 				
+ 	<select id="getAllReviewByusername" resultMap="ReviewList"  parameterType="string">
+ 		select *
+ 		from reviewmodel
+ 		where username=#{username}
+ 	</select>
+ 	
+ 	<select id="getAllReviewByproductionid" resultMap="ReviewList"  parameterType="int">
+ 		select *
+		from reviewmodel 
+		where production_id=#{production_id}
+ 	</select>
+ 	
+ 	<select id="getReviewCount" resultType="int">
+ 		select count(*)
+ 		from reviewmodel
+ 	</select>
+ 	
+ </mapper>

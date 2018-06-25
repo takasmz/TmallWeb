@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.web.dao.UserDao">
+ <cache></cache>
+ 	<insert id="insertUser" parameterType="com.web.pojo.UserBean">
+ 		insert into usermodel(username,password,nickname,mail)
+ 		values(#{username},#{password},#{nickname},#{mail})
+ 	</insert>
+ 	<select id="findUsers">
+ 		select id,username,password,nickname,mail
+ 		from usermodel
+ 		<where>
+ 			<if test="userName != null">
+ 				username like concat("%",#{username},"%")
+ 			</if>
+ 		</where>
+ 	</select>
+ 	<delete id="deleteUser">
+ 		DELETE from
+		usermodel
+		where id = 
+		(SELECT t.uid FROM(
+		SELECT id as uid FROM usermodel
+		ORDER BY id
+		LIMIT #{id},1)t
+		)
+ 	</delete>
+ 	<update id="updateUser">
+ 		update usermodel
+ 		<set>
+ 			<if test="username != null"> username = #{username},</if>
+ 			<if test="password != null"> password = #{password},</if>
+ 			<if test="nickname != null"> nickname = #{nickname},</if>
+ 			<if test="mail != null"> mail = #{mail},</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="getUserById" resultType="com.web.pojo.UserBean" parameterType="int">
+ 		select id,username,password,nickname,mail
+ 		from usermodel
+ 		where id=#{id}
+ 	</select>
+ 				
+ 	<select id="getUserByUsername" resultType="com.web.pojo.UserBean" parameterType="string">
+ 		select id,username,password,nickname,mail
+ 		from usermodel
+ 		where username=#{username}
+ 	</select>
+ 	
+ 	<select id="getMatchCount" resultType="int">
+ 		select count(*)
+		from usermodel
+		where username like (#{username})
+		and password like (#{password})
+ 	</select>
+ 	
+ 	<select id="getalluser" resultType="com.web.pojo.UserBean">
+ 		select *
+ 		from usermodel
+ 	</select>
+ </mapper>

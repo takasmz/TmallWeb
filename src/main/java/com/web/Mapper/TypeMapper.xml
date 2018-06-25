@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.web.dao.TypeDao">
+ <cache></cache>
+ <resultMap type="com.web.pojo.TypeBean" id="typelist">
+ 		<result property="id" column="id"/>
+ 		<result property="name" column="name"/>
+ 		<result property="path" column="path"/>
+ 	</resultMap>
+ 	
+ 	<insert id="inserttype" parameterType="com.web.pojo.TypeBean">
+ 		insert into typemodel(name,path)
+ 		values(#{name},#{path})
+ 	</insert>
+ 	
+ 	<delete id="deleteType">
+ 		DELETE from
+		typemodel
+		where id = 
+		(SELECT t.pid FROM(
+		SELECT id as pid FROM typemodel
+		ORDER BY id
+		LIMIT #{id},1)t
+		)
+ 	</delete>
+ 	
+ 	<update	id="updatetype" >
+ 		update typemodel
+ 		set name=#{name},path=#{path}
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="gettids" resultType="com.web.pojo.TypeBean" parameterType="int">
+ 		 select id,typemodel.`name`
+ 		from typemodel
+		where id BETWEEN 0*#{n} and 5*(#{n}+1)
+ 	</select>
+ 	
+ 	<select id="gettypebyid" resultMap="typelist" parameterType="int">
+ 		select name,path
+ 		from typemodel
+ 		where id = #{id}
+ 	</select>
+ 	
+ 	<select id="getalltype" resultType="String">
+ 		select name
+ 		from typemodel
+ 	</select>
+ 	
+ </mapper>

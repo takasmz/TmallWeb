@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.web.dao.OrderDao">
+ <cache></cache>
+ 	<resultMap type="com.web.pojo.OrderBean" id="OrderList">
+ 		<result property="id" column="id"/>
+ 		<result property="user_id" column="user_id"/>
+ 		<result property="number" column="number"/>
+ 		<result property="payment" column="payment"/>
+ 		<result property="production_id" column="production_id"/>
+ 		<result property="client_id" column="client_id"/>
+ 		<result property="name" column="name"/>
+ 		<result property="imgpath" column="imgpath"/>
+ 		<result property="price" column="price"/>
+ 	</resultMap>
+ 
+ 	<insert id="insertOrder" parameterType="com.web.pojo.OrderBean">
+ 		insert into ordermodel(user_id,number,production_id,client_id)
+ 		values(#{user_id},#{number},#{production_id},#{client_id})     
+ 	</insert>
+ 	<delete id="deleteOrder">
+ 		delete from ordermodel where id = #{id}
+ 	</delete>
+ 	<update id="updateOrder">
+ 		update ordermodel
+ 		<set>
+ 			<if test="user_id != null"> user_id = #{user_id},</if>
+ 			<if test="number != null"> number = #{number},</if>
+ 			<if test="production_id != null"> production_id = #{production_id},</if>
+ 			<if test="client_id != null">client_id = #{client_id}</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="getOrderById" resultMap="OrderList" parameterType="int">
+ 		select *
+ 		from ordermodel
+ 		where id=#{id}
+ 	</select>
+ 				
+ 	<select id="getAllOrderByuserid" resultMap="OrderList"  parameterType="string">
+ 		select *
+ 		from ordermodel
+ 		where user_id=#{user_id}
+ 	</select>
+ 	
+ 	<select id="getAllOrderByclientid" resultMap="OrderList"  parameterType="string">
+ 		select id,number,user_id,production_id
+		from ordermodel 
+		where client_id = #{client_id}
+ 	</select>
+ 	
+ 	<select id="getOrderCount" resultType="int">
+ 		select count(*)
+ 		from ordermodel
+ 	</select>
+ 	
+ </mapper>

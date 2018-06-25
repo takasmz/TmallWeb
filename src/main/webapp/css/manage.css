@@ -1,0 +1,149 @@
+a {
+		color: #999;
+		cursor:pointer;
+	}
+	a:hover {
+		text-decoration: none;
+		color: #C40000;
+	}
+	body{
+	font-size: 12px;
+	font-family: Arial;
+	}
+	#title span{
+	font-size:20px;
+	font-weight: bold;
+	}
+	#total{
+	display: inline-block;
+	text-align: center;
+	width:100%;
+	height:100%;
+	margin:auto;
+	}
+	img.image{
+	width:80px;
+	height:80px;
+	padding: 1px;
+	border: 1px solid #EEEEEE;
+	}
+	#Items td{
+	text-align:center;
+	height:20px;
+	vertical-align:center;
+	}
+	tr{
+	border:1px solid #CCCCCC;
+	}
+	#Items{
+	table-layout: fixed;    
+	border-collapse: collapse;  
+    margin: 0 auto;  
+    text-align: center;  
+	width:800px;
+	height:600px;
+	}
+	#menuitems{
+	border-collapse: collapse;  
+    margin: 0 auto;  
+    text-align: center;  
+	width:800px;
+	height:20px;
+	}
+	#menuitems button {
+    background-color: #A0A0A0;
+    border: 1px solid white;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    width: 157px;
+    height: 30px;
+	}
+	
+	div.loginDivInProductPageModalDiv {
+	width: 350px;
+	height:500px;
+	}
+	
+	div#modifytitle{
+	margin: 20px auto;
+    weight: 300px;
+    height: 40px;
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+	}
+div.Input {
+	border: 1px solid #CBCBCB;
+	margin: 20px 0px;
+}
+
+div.Input input {
+	display: inline-block;
+	border: 0px solid transparent;
+	width: 244px;
+	height: 30px;
+	position: relative;
+	left: 6px;
+	top: 2px;
+}
+
+div.Input span, div.Input input {
+	display: inline-block;
+}
+
+div.Input span.InputIcon {
+	font-size: 13px;
+    background-color: #CBCBCB;
+    width: 40px;
+    height: 41.5px;
+    line-height: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+span.InputIcon span.glyphicon {
+	font-size: 22px;
+	position: relative;
+	left: 9px;
+	top: 9px;
+	color: #606060;
+}
+#changebutton{
+    border: 0;
+    color: white;
+    font-size: 12px;
+    display: inline;
+    height: 20px;
+    float: right;
+    width: 80px;
+    margin-top: 24px;
+}
+#addarea{
+display: inline-block;
+margin-left:100px;
+position: absolute;
+top:150px;
+}
+#itemarea{
+display: inline-block;
+}
+#addarea button {
+	margin:20px;
+    background-color: #555555; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    border-radius: 8px;
+}
+.Itemmenu{
+height:28.8px;
+}
+.Item{
+height:114.4px;
+}

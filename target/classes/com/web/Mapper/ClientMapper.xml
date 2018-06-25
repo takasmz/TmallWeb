@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.web.dao.ClientDao">
+ <cache></cache>
+ 	<resultMap type="com.web.pojo.ClientBean" id="ClientList">
+ 		<result property="id" column="id"/>
+ 		<result property="user_id" column="user_id"/>
+ 		<result property="client_id" column="client_id"/>
+ 		<result property="peoplename" column="peoplename"/>
+ 		<result property="phone" column="phone"/>
+ 		<result property="address" column="address"/>
+ 		<result property="postal" column="postal"/>
+ 		<result property="time" column="time"/>
+ 		<result property="payment" column="payment"/>
+ 		<result property="status" column="status"  
+  		typeHandler="com.web.Enums.EnumStatusHandler"/>
+ 	</resultMap>
+ 
+ 	<insert id="insertClient" parameterType="com.web.pojo.ClientBean">
+ 		insert into clientmodel(user_id,client_id,peoplename,phone,address,postal,time,status,payment)
+ 		values(#{user_id},#{client_id},#{peoplename},#{phone},#{address},#{postal},#{time},#{status, typeHandler=com.web.Enums.EnumStatusHandler},#{payment})
+ 		<!-- selectKey用来返回主键的值 -->
+ 		<selectKey keyColumn="id" resultType="int" keyProperty="id" order="AFTER">
+ 			select LAST_INSERT_ID()
+ 		</selectKey>
+ 	</insert>
+ 	
+ 	<delete id="deleteClient">
+ 		delete from clientmodel where id = #{id}
+ 	</delete>
+ 	
+ 	<update id="updateClientInfo">
+ 		update clientmodel
+ 		set	address = #{address},
+ 			phone = #{phone},
+ 			postal = #{postal},
+ 			peoplename = #{peoplename}
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<update id="updateClientStatus">
+ 		update clientmodel
+ 		<set>
+ 			<if test="status != null">status = #{status, typeHandler=com.web.Enums.EnumStatusHandler}</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<select id="getClientByid" resultMap="ClientList" parameterType="int">
+ 		select id,user_id,client_id,peoplename,phone,address,postal,time,status,payment
+ 		from clientmodel
+ 		where id=#{id}
+ 	</select>
+ 				
+ 	<select id="getClientByClientid" resultMap="ClientList" parameterType="String">
+ 		select id,user_id,client_id,peoplename,phone,address,postal,time,status,payment
+ 		from clientmodel
+ 		where client_id=#{client_id}
+ 	</select>			
+ 				
+ 	<select id="getAllClient" resultMap="ClientList"  parameterType="int">
+ 		select *
+ 		from clientmodel
+ 		where user_id=#{user_id}
+ 	</select>
+ 	
+ 	
+ </mapper>

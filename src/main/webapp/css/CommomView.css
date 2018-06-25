@@ -1,0 +1,150 @@
+body{
+  font-size:12px;
+  font-family: Arial;
+  }
+a{
+  color:#999;
+  }
+.redColor{
+color: #C40000 !important;
+}  
+
+.top{
+  padding-left:150px;
+  padding-right:150px;
+  background-color:#f2f2f2;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-bottom:1px solid #e7e7e7;
+  }
+  nav.top span, nav.top a{
+color: #999;
+margin: 0px 10px 0px 10px;
+}
+  nav.top a:hover{
+color: #C40000;
+text-decoration:none;
+}
+.scarch{
+ background-color:#C40000;
+margin:50px auto;
+width: 400px;
+padding: 1px;
+height: 40px;
+display: block; 
+}
+.but-search{
+        border: 1px solid transparent;
+        background-color:#C40000;
+		color:White;
+		font-size:20px;
+		width:110px;
+		font-weight: bold;
+}
+
+.text-search {
+border:1px solid transparent;
+width:275px;
+height:36px;
+margin:1px;
+outline:none;
+}
+.searchBelow{
+margin-top: 3px;
+margin-left: -20px;
+}
+.searchBelow span{
+color: #999;
+}
+.searchBelow a{
+padding: 0px 20px 0px 20px;
+font-size: 14px;
+}
+img.logo{
+position: absolute;
+left: 120px;
+top: 30px;
+z-index:-1;
+}
+
+.total{
+width:100%;
+}
+
+div.total div.header{
+background-color:#DD2727;
+padding-left:150px;
+}
+
+div.shouhou img{
+margin:0 auto;
+}
+
+div.yewei a.title{
+font-size:16px;
+color:#646464;
+font-weight:bold;
+}
+
+div.yewei1{
+padding-left:150px;
+padding-bottom:20px;
+}
+
+div.yewei1 div{
+display:inline-block;
+width:190px;
+height:130px;
+text-align:center;
+valign:top;
+margin:10px 0px;
+}
+div.yewei1 div a{
+text-align:center; 
+
+}
+
+div.weiye2{
+background-color:black;
+padding-left:150px;
+padding-right:150px;
+border-top-style:solid;
+border-top-color:red;
+border-top-width:2px;
+}
+
+div.weiye2-1{
+padding-top:10px;
+padding-bottom:20px;
+}
+
+div.weiye2-2{
+padding-bottom:10px;
+}
+
+div.weiye2 a{
+color:white;
+font-size:12px;
+margin-right:10px;
+}
+
+div.weiye2 p{
+color:#666666;
+}
+
+div.yewei{
+margin-top:30px;
+}
+
+div.shouhou{
+margin:	30px 150px 30px 150px;
+border-top-style:solid;
+border-top-color:black;
+border-top-width:1px;
+border-bottom-style:solid;
+border-bottom-color:black;
+border-bottom-width:1px;
+}
+#end-page{
+	margin-top:0px;
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.web.Dao.EvaluationDao">
+ 	<insert id="insertEvaluation" parameterType="com.web.POJO.EvaluationBean">
+ 		insert into evaluationmodel(content,username,production_id)
+ 		values(#{content},#{username},#{production_id})
+ 	</insert>
+ 	
+ 	<delete id="deleteEvaluation">
+ 		delete from evaluationmodel where id = #{id}
+ 	</delete>
+ 	<update id="updateEvaluation">
+ 		update evaluationmodel
+ 		<set>
+ 			<if test="content != null"> content = #{content},</if>
+ 			<if test="username != null"> username = #{username},</if>
+ 			<if test="production_id != null"> production_id = #{production_id},</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update>
+ 	
+ </mapper>

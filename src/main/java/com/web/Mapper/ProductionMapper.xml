@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+ <mapper namespace="com.web.dao.ProductionDao">
+ <cache />
+ 	<resultMap type="com.web.pojo.ProductionBean" id="productionList">
+ 		<result property="id" column="id"/>
+ 		<result property="name" column="name"/>
+ 		<result property="price" column="price"/>
+ 		<result property="sales_volume" column="sales_volume"/>
+ 		<result property="stock" column="stock"/>
+ 		<result property="type_id" column="type_id"/>
+ 		<result property="model" column="model"/>
+ 		<result property="brands" column="brands"/>
+ 		<result property="imgpath" column="imgpath"/>
+ 	</resultMap>
+ 	
+ 	<resultMap type="com.web.pojo.PropertyBean" id="propertylist">
+ 		<result property="id" column="id"/>
+ 		<result property="type_id" column="type_id"/>
+ 		<result property="production_id" column="production_id"/>
+ 		<result property="name" column="name"/>
+ 		<result property="value" column="value"/>
+ 	</resultMap>
+  
+ 	<insert id="insertProduction" parameterType="com.web.pojo.ProductionBean">
+ 		insert into productionmodel(name,price,sales_volume,stock,type_id,model,brands,imgpath)
+ 		values(#{name},#{price},#{sales_volume},#{stock},#{type_id},#{model},#{brands},#{imgpath} )
+ 	</insert>
+ 		
+ 	
+ 	<delete id="deleteProduction" parameterType="int">
+ 		DELETE from
+		productionmodel
+		where id = 
+		(SELECT t.tid FROM(
+		SELECT id as tid FROM productionmodel
+		ORDER BY id
+		LIMIT #{id},1)t
+		)
+ 	</delete>	
+ 	
+ 	<update id="updateStockAndSales" parameterType="Integer">
+ 		update productionmodel
+ 		set stock = #{stock},sales_volume = #{sales_volume}
+ 		where id = #{id}
+ 	</update>
+ 	
+ 	<update id="updateProduction">
+ 		update productionmodel
+ 		<set>
+ 			<if test="name != null"> name = #{name},</if>
+ 			<if test="price != null"> price = #{price},</if>
+ 			<if test="sales_volume != null"> sales_volume = #{sales_volume},</if>
+ 			<if test="stock != null"> stock = #{stock},</if>
+ 			<if test="type_id != null"> type_id = #{type_id},</if>
+ 			<if test="model != null"> model = #{model},</if>
+ 			<if test="brands != null"> brands = #{brands},</if>
+ 			<if test="imgpath != null"> imgpath = #{imgpath},</if>
+ 		</set>
+ 		where id = #{id}
+ 	</update> 	
+ 	
+ 	<select id="getProductionByid" resultType="com.web.pojo.ProductionBean" parameterType="int">
+ 		select id,name,price,sales_volume,stock,type_id,model,brands,imgpath
+ 		from productionmodel
+ 		where id=#{id}
+ 	</select>
+ 				
+ 	<select id="getProductionByname" resultMap="productionList" parameterType="string">
+ 		select *
+ 		from productionmodel
+ 		where name like CONCAT('%',#{name},'%')
+ 	</select>
+ 	
+ 	<select id="getProductionBytid" resultMap="productionList" parameterType="int">
+ 		select id,name,price,sales_volume,stock,type_id,model,brands,imgpath
+ 		from productionmodel
+ 		where type_id=#{type_id}
+ 	</select>
+ 	
+ 	<select id="getProductionBybrand" resultMap="productionList" parameterType="string">
+ 		select id,name,price,sales_volume,stock,type_id,model,brands,imgpath
+ 		from productionmodel
+ 		where brands=#{brands}
+ 	</select>
+ 	
+ 	<select id="getimgpathByid" resultType="String" parameterType="int">
+ 		select imgpath
+ 		form productionmodel
+ 		where id=#{id}
+ 	</select>
+ 	
+ 	<select id="getPropertyBypid" resultMap="propertylist" parameterType="int">
+ 		SELECT propertyvaluemodel.id,production_id,property_id,propertymodel.name,value
+		from propertymodel INNER JOIN propertyvaluemodel
+		WHERE production_id=#{production_id} and propertymodel.id = property_id
+ 	</select> 	
+ 	
+ 	<select id="getallproduction" resultMap="productionList">
+ 		select *
+ 		from productionmodel
+ 	</select>
+ 		
+ </mapper>
